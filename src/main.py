@@ -3,6 +3,7 @@ from constants import *
 from player import *
 from asteroidfield import *
 from asteroid import *
+import sys
 
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -35,10 +36,14 @@ def main():
             n.update(dt)
         for n in drawables:
             n.draw(SCREEN)
+        for n in asteroids:
+            if n.collision(player_character) == True:
+                print('Game over!')
+                sys.exit()
 
         pygame.display.flip()
         clock.tick(60)
-        dt = (clock.tick(60) / 1000)
+        dt = (clock.tick(60) / 100)
 
 if __name__ == "__main__":
     main()
