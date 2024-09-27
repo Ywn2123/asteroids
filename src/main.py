@@ -46,7 +46,7 @@ def main():
         for n in asteroids:
             for i in shots:
                 if n.collision(i):
-                    n.kill()
+                    n.split()
 
 
         pygame.display.flip()
