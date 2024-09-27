@@ -47,11 +47,12 @@ def main():
             for i in shots:
                 if n.collision(i):
                     n.split()
+                    i.kill()
 
 
         pygame.display.flip()
         clock.tick(60)
-        dt = (clock.tick(60) / 1000)
+        dt = (clock.tick(60) / 500)
 
 if __name__ == "__main__":
     main()

@@ -20,6 +20,9 @@ class Asteroid(CircleShape):
         if self.radius <= ASTEROID_MIN_RADIUS:
             return
         else:
+            # position should be changed to an offset of self.position to prevent bullet killing multiple
+            # or
+            # kill bullet on impact
             random_angle = random.uniform(20,50)
             new_radius = self.radius - ASTEROID_MIN_RADIUS
             vect1, vect2 = pygame.math.Vector2.rotate(self.velocity, random_angle), pygame.math.Vector2.rotate(self.velocity, -random_angle)
