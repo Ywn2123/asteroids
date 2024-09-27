@@ -3,6 +3,7 @@ from constants import *
 from player import *
 from asteroidfield import *
 from asteroid import *
+from shoot import *
 import sys
 
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -15,10 +16,12 @@ def main():
     updateables = pygame.sprite.Group()
     drawables = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
 
     Player.containers = (updateables, drawables)
     Asteroid.containers = (asteroids, updateables, drawables)
     AsteroidField.containers = (updateables)
+    Shot.containers = (shots, updateables, drawables)
 
     player_character = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     asteroid_field = AsteroidField()
@@ -40,10 +43,15 @@ def main():
             if n.collision(player_character) == True:
                 print('Game over!')
                 sys.exit()
+        for n in asteroids:
+            for i in shots:
+                if n.collision(i):
+                    n.kill()
+
 
         pygame.display.flip()
         clock.tick(60)
-        dt = (clock.tick(60) / 100)
+        dt = (clock.tick(60) / 1000)
 
 if __name__ == "__main__":
     main()
