@@ -4,6 +4,7 @@ from player import *
 from asteroidfield import *
 from asteroid import *
 from shoot import *
+from points import *
 import sys
 
 SCREEN = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -17,14 +18,17 @@ def main():
     drawables = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
     shots = pygame.sprite.Group()
+    points = pygame.sprite.Group()
 
     Player.containers = (updateables, drawables)
     Asteroid.containers = (asteroids, updateables, drawables)
     AsteroidField.containers = (updateables)
     Shot.containers = (shots, updateables, drawables)
+    points.containers = (points, updateables, drawables)
 
     player_character = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     asteroid_field = AsteroidField()
+    points_counter = Points()
     # asteroid_character = Asteroid()
 
 
@@ -49,7 +53,7 @@ def main():
                     n.split()
                     i.kill()
 
-
+        SCREEN.blit(points,(0,0))
         pygame.display.flip()
         clock.tick(60)
         dt = (clock.tick(60) / 500)
